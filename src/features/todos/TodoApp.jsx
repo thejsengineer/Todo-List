@@ -79,7 +79,7 @@ export default function TodoApp() {
             <span>Todo List</span>
           </a>
           <h1 className="header-title" id="page-title">
-            Make room for{" "}<span>what matters.</span>
+            Make room for <span>what matters today.</span>
           </h1>
         </div>
         <button
