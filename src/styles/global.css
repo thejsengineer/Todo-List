@@ -84,16 +84,24 @@ input:focus-visible {
 }
 
 .topbar {
-  display: flex;
+  display: grid;
   width: min(100%, 1120px);
-  height: 88px;
+  min-height: 104px;
   align-items: center;
-  justify-content: space-between;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 20px;
+}
+
+.topbar-identity {
+  display: contents;
 }
 
 .brand {
   display: inline-flex;
+  grid-column: 1;
+  grid-row: 1;
   align-items: center;
+  justify-self: start;
   gap: 10px;
   color: var(--text);
   font-family: Manrope, sans-serif;
@@ -120,10 +128,29 @@ input:focus-visible {
   border-radius: 50%;
 }
 
+.header-title {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  font-family: Manrope, sans-serif;
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 600;
+  letter-spacing: -1.6px;
+  line-height: 1.08;
+  text-align: center;
+}
+
+.header-title span {
+  color: var(--accent);
+}
+
 .theme-toggle {
   display: inline-flex;
+  grid-column: 3;
+  grid-row: 1;
   min-height: 40px;
   align-items: center;
+  justify-self: end;
   gap: 9px;
   padding: 0 13px;
   border: 1px solid var(--line);
@@ -157,12 +184,13 @@ input:focus-visible {
 
 .todo-panel {
   width: min(100%, 560px);
-  margin: clamp(42px, 9vh, 92px) 0 auto;
+  margin: clamp(18px, 3vh, 30px) 0 auto;
 }
 
 .eyebrow {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   color: var(--text-faint);
   font-size: 10px;
@@ -177,24 +205,12 @@ input:focus-visible {
   background: var(--accent);
 }
 
-h1 {
-  margin: 20px 0 0;
-  font-family: Manrope, sans-serif;
-  font-size: clamp(40px, 7vw, 58px);
-  font-weight: 600;
-  letter-spacing: -3.4px;
-  line-height: 1.08;
-}
-
-h1 span {
-  color: var(--accent);
-}
-
 .intro {
-  margin: 15px 0 30px;
+  margin: 0 0 30px;
   color: var(--text-soft);
   font-size: 14px;
   line-height: 1.6;
+  text-align: center;
 }
 
 .todo-form {
@@ -484,15 +500,33 @@ h1 span {
   }
 
   .topbar {
-    height: 72px;
+    min-height: 0;
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 14px;
+    padding: 14px 0;
+  }
+
+  .brand {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .header-title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: clamp(18px, 4vw, 24px);
+    letter-spacing: -0.8px;
+    justify-self: center;
+  }
+
+  .theme-toggle {
+    grid-column: 2;
+    grid-row: 1;
   }
 
   .todo-panel {
-    margin-top: clamp(48px, 11vh, 82px);
-  }
-
-  h1 {
-    letter-spacing: -2.6px;
+    margin-top: 16px;
   }
 
   .todo-form {
@@ -512,6 +546,12 @@ h1 span {
 
   .icon-button {
     opacity: 1;
+  }
+}
+
+@media (max-width: 420px) {
+  .header-title {
+    font-size: 24px;
   }
 }
 

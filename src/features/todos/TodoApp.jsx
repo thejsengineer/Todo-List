@@ -40,7 +40,9 @@ function EmptyIcon() {
 function getInitialTheme() {
   const savedTheme = localStorage.getItem("daylight-theme");
   if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
 }
 
 export default function TodoApp() {
@@ -69,15 +71,24 @@ export default function TodoApp() {
       transition={{ duration: 0.35 }}
     >
       <header className="topbar">
-        <a className="brand" href="#" aria-label="Daylight home">
-          <span className="brand-mark"><span /></span>
-          <span>daylight</span>
-        </a>
+        <div className="topbar-identity">
+          <a className="brand" href="#" aria-label="Daylight home">
+            <span className="brand-mark">
+              <span />
+            </span>
+            <span>Todo List</span>
+          </a>
+          <h1 className="header-title" id="page-title">
+            Make room for{" "}<span>what matters.</span>
+          </h1>
+        </div>
         <button
           className="theme-toggle"
           type="button"
           aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-          onClick={() => setTheme((current) => current === "light" ? "dark" : "light")}
+          onClick={() =>
+            setTheme((current) => (current === "light" ? "dark" : "light"))
+          }
         >
           <AnimatePresence mode="wait" initial={false}>
             <motion.span
@@ -96,12 +107,17 @@ export default function TodoApp() {
       </header>
 
       <section className="todo-panel" aria-labelledby="page-title">
-        <div className="eyebrow"><span className="eyebrow-dot" /> YOUR SPACE, YOUR PACE</div>
-        <h1 id="page-title">Make room for<br /><span>what matters.</span></h1>
-        <p className="intro">A little list to help you get there, one thing at a time.</p>
+        <div className="eyebrow">
+          <span className="eyebrow-dot" /> YOUR SPACE, YOUR PACE
+        </div>
+        <p className="intro">
+          A little list to help you get there, one thing at a time.
+        </p>
 
         <form className="todo-form" onSubmit={handleSubmit}>
-          <label className="visually-hidden" htmlFor="new-todo">Add a task</label>
+          <label className="visually-hidden" htmlFor="new-todo">
+            Add a task
+          </label>
           <input
             id="new-todo"
             type="text"
@@ -124,7 +140,11 @@ export default function TodoApp() {
         </div>
 
         {todos.length > 0 ? (
-          <TodoItems todos={todos} onToggle={toggleTodo} onRemove={removeTodo} />
+          <TodoItems
+            todos={todos}
+            onToggle={toggleTodo}
+            onRemove={removeTodo}
+          />
         ) : (
           <motion.div
             className="empty-state"
@@ -132,7 +152,9 @@ export default function TodoApp() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.12, duration: 0.25 }}
           >
-            <div className="empty-icon"><EmptyIcon /></div>
+            <div className="empty-icon">
+              <EmptyIcon />
+            </div>
             <p className="empty-title">Your list is a blank page.</p>
             <p className="empty-copy">Add a task above and make today yours.</p>
           </motion.div>
@@ -151,7 +173,9 @@ export default function TodoApp() {
 
       <footer className="footer">
         <span>One thing at a time.</span>
-        <span className="footer-sparkle" aria-hidden="true">✳</span>
+        <span className="footer-sparkle" aria-hidden="true">
+          ✳
+        </span>
       </footer>
     </motion.main>
   );
